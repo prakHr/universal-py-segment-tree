@@ -1,3 +1,5 @@
+# python >= 3.12
+
 from segee import GenericSegmentTree
 def gcd(a,b):
     if a==0:
