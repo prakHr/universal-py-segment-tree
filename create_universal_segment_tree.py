@@ -40,7 +40,7 @@ def create_tree(list_of_values,fn_type):
     elif fn_type=="str":
         initial_state = ""
     else:
-        return 'Use from this list of fn types:- ["add","gcd","max","min","str"]'
+        return 'Use from this list of fn types:- ["sum","gcd","max","min","str"]'
 
 
     l = len(list_of_values)
@@ -52,14 +52,14 @@ def create_tree(list_of_values,fn_type):
     return tree
 
 def update_tree(tree,index,value_at_index):
-    if tree == 'Use from this list of fn types:- ["add","gcd","max","min","str"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str"]':
         return tree
     tree.set(index,value_at_index)
     return tree
 
 def get_range_update_in_the_tree(tree,fn_type,start_index,end_index):
 
-    if tree == 'Use from this list of fn types:- ["add","gcd","max","min","str"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str"]':
         return tree
     if fn_type == "gcd":
         rv = 0
