@@ -6,7 +6,7 @@ def gcd(a,b):
         return a
     if a<b:
         a,b = b,a
-    return gcd(b,b%a)
+    return gcd(b,a%b)
 
 def create_tree(list_of_values,fn_type):
     def generic_function(a,b):
@@ -20,7 +20,7 @@ def create_tree(list_of_values,fn_type):
                     return a
                 if a<b:
                     a,b = b,a
-                return gcd(b,b%a)
+                return gcd(b,a%b)
             return gcd(a,b)
         elif fn_type=="max":
             return max(a,b)
