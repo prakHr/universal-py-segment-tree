@@ -10,7 +10,7 @@ def gcd(a,b):
         a,b = b,a
     return gcd(b,a%b)
 
-def create_tree(list_of_values,fn_type):
+def create_tree(list_of_values, fn_type):
     def generic_function(a,b):
         if fn_type=="sum":
             return a+b
@@ -46,20 +46,20 @@ def create_tree(list_of_values,fn_type):
 
 
     l = len(list_of_values)
-    tree = GenericSegmentTree(size = l,identity = initial_state,operation = generic_function)
+    tree = GenericSegmentTree(size = l, identity = initial_state, operation = generic_function)
     i = 0
     for value in list_of_values:
         tree.set(i,value)
         i+=1
     return tree
 
-def update_tree(tree,index,value_at_index):
+def update_tree(tree, index, value_at_index):
     if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str"]':
         return tree
     tree.set(index,value_at_index)
     return tree
 
-def get_range_update_in_the_tree(tree,fn_type,start_index,end_index):
+def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
 
     if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str"]':
         return tree
