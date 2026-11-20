@@ -26,6 +26,8 @@ def create_tree(list_of_values,fn_type):
             return max(a,b)
         elif fn_type=="min":
             return min(a,b)
+        elif fn_type=="str":
+            return str(a)+str(b)
 
     if fn_type=="sum":
         initial_state = 0
@@ -35,6 +37,8 @@ def create_tree(list_of_values,fn_type):
         initial_state = min(list_of_values)
     elif fn_type=="min":
         initial_state = max(list_of_values)
+    elif fn_type=="str":
+        initial_state = ""
     else:
         return 'Use from this list of fn types:- ["add","gcd","max","min"]'
 
@@ -65,6 +69,12 @@ def get_range_update_in_the_tree(tree,fn_type,start_index,end_index):
         for idx in range(start_index,end_index+1):
             rv = gcd(rv,list_of_a_tree[idx])
         return rv
+    elif fn_type == "str":
+        rv = ""
+        list_of_a_tree = list(tree)
+        for idx in range(start_index,end_index+1):
+            rv += str(list_of_a_tree[idx])
+        return rv
     else:
         string = f"{fn_type}({list(tree)}[{start_index}:{end_index+1}])"
         rv = eval(string)
@@ -72,7 +82,7 @@ def get_range_update_in_the_tree(tree,fn_type,start_index,end_index):
 
 if __name__=="__main__":
     list_of_values = [2,1,1,1,1]
-    fn_type = "gcd"
+    fn_type = "str"
     tree = create_tree(list_of_values,fn_type)
 
     index = 0
