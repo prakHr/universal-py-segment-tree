@@ -44,8 +44,7 @@ def create_tree(list_of_values,fn_type):
 
 
     l = len(list_of_values)
-    tree = GenericSegmentTree(size = l,identity =
-initial_state,operation = generic_function)
+    tree = GenericSegmentTree(size = l,identity = initial_state,operation = generic_function)
     i = 0
     for value in list_of_values:
         tree.set(i,value)
@@ -63,7 +62,6 @@ def get_range_update_in_the_tree(tree,fn_type,start_index,end_index):
     if tree == 'Use from this list of fn types:- ["add","gcd","max","min"]':
         return tree
     if fn_type == "gcd":
-
         rv = 0
         list_of_a_tree = list(tree)
         for idx in range(start_index,end_index+1):
