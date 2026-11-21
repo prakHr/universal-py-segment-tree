@@ -30,6 +30,8 @@ def create_tree(list_of_values, fn_type):
             return min(a,b)
         elif fn_type=="str":
             return str(a)+str(b)
+        elif fn_type=="xor":
+            return a^b
 
     if fn_type=="sum":
         initial_state = 0
@@ -41,9 +43,10 @@ def create_tree(list_of_values, fn_type):
         initial_state = max(list_of_values)
     elif fn_type=="str":
         initial_state = ""
+    elif fn_type=="xor":
+        initial_state = 0
     else:
-        return 'Use from this list of fn types:- ["sum","gcd","max","min","str"]'
-
+        return 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor"]'
 
     l = len(list_of_values)
     tree = GenericSegmentTree(size = l, identity = initial_state, operation = generic_function)
@@ -54,14 +57,14 @@ def create_tree(list_of_values, fn_type):
     return tree
 
 def update_tree(tree, index, value_at_index):
-    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor"]':
         return tree
     tree.set(index,value_at_index)
     return tree
 
 def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
 
-    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor"]':
         return tree
     if fn_type == "gcd":
         rv = 0
@@ -75,23 +78,29 @@ def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
         for idx in range(start_index,end_index+1):
             rv += str(list_of_a_tree[idx])
         return rv
+    elif fn_type == "xor":
+        rv = 0
+        list_of_a_tree = list(tree)
+        for idx in range(start_index,end_index+1):
+            rv ^= list_of_a_tree[idx]
+        return rv
     else:
         string = f"{fn_type}({list(tree)}[{start_index}:{end_index+1}])"
         rv = eval(string)
         return rv
 
 if __name__=="__main__":
-    list_of_values = [2,1,1,1,1]
-    fn_type = "str"
+    list_of_values = [1,1,1,1,1]
+    fn_type = "xor"
     tree = create_tree(list_of_values,fn_type)
+    print(tree)
 
     index = 0
     value_at_index = 10
     tree = update_tree(tree,index,value_at_index)
     print(tree)
 
-    start_index = 0
-    end_index = 1
+    start_index = len(list_of_values)-2
+    end_index = len(list_of_values)-1
     rv = get_range_update_in_the_tree(tree,fn_type,start_index,end_index)
     print(rv)
-
