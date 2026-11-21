@@ -49,8 +49,12 @@ def create_tree(list_of_values, fn_type):
         initial_state = 0
     elif fn_type=="evenIndexOddIndexAlternatingSum":
         initial_state = 0
+    elif fn_type=="restFromEvenIndexOddIndexAlternatingDiff":
+        initial_state = 0
+    elif fn_type=="restFromEvenIndexOddIndexAlternatingSum":
+        initial_state = 0
     else:
-        return 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff","evenIndexOddIndexAlternatingSum"]'
+        return 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff","evenIndexOddIndexAlternatingSum","restFromEvenIndexOddIndexAlternatingDiff","restFromEvenIndexOddIndexAlternatingSum"]'
 
 
     l = len(list_of_values)
@@ -62,14 +66,14 @@ def create_tree(list_of_values, fn_type):
     return tree
 
 def update_tree(tree, index, value_at_index):
-    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff","evenIndexOddIndexAlternatingSum"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff","evenIndexOddIndexAlternatingSum","restFromEvenIndexOddIndexAlternatingDiff","restFromEvenIndexOddIndexAlternatingSum"]':
         return tree
     tree.set(index,value_at_index)
     return tree
 
 def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
 
-    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff","evenIndexOddIndexAlternatingSum"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff","evenIndexOddIndexAlternatingSum","restFromEvenIndexOddIndexAlternatingDiff","restFromEvenIndexOddIndexAlternatingSum"]':
         return tree
     if fn_type == "gcd":
         rv = 0
@@ -107,6 +111,26 @@ def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
             else:
                 rv += list_of_a_tree[idx]
         return rv
+    elif fn_type == "restFromEvenIndexOddIndexAlternatingDiff":
+        list_of_a_tree = list(tree)
+        total = sum(list_of_a_tree)
+        rv = 0
+        for idx in range(start_index,end_index+1):
+            if idx%2==0:
+                rv += list_of_a_tree[idx]
+            else:
+                rv -= list_of_a_tree[idx]
+        return total - rv
+    elif fn_type == "restFromEvenIndexOddIndexAlternatingSum":
+        list_of_a_tree = list(tree)
+        total = sum(list_of_a_tree)
+        rv = 0
+        for idx in range(start_index,end_index+1):
+            if idx%2==0:
+                rv -= list_of_a_tree[idx]
+            else:
+                rv += list_of_a_tree[idx]
+        return total - rv
     else:
         string = f"{fn_type}({list(tree)}[{start_index}:{end_index+1}])"
         rv = eval(string)
@@ -114,7 +138,7 @@ def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
 
 if __name__=="__main__":
     list_of_values = [1,1,1,1,1]
-    fn_type = "xor"
+    fn_type = "restFromEvenIndexOddIndexAlternatingSum"
     tree = create_tree(list_of_values,fn_type)
     print(tree)
 
