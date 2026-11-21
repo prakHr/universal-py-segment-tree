@@ -45,8 +45,11 @@ def create_tree(list_of_values, fn_type):
         initial_state = ""
     elif fn_type=="xor":
         initial_state = 0
+    elif fn_type=="evenIndexOddIndexAlternatingDiff":
+        initial_state = 0
     else:
-        return 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor"]'
+        return 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff"]'
+
 
     l = len(list_of_values)
     tree = GenericSegmentTree(size = l, identity = initial_state, operation = generic_function)
@@ -57,14 +60,14 @@ def create_tree(list_of_values, fn_type):
     return tree
 
 def update_tree(tree, index, value_at_index):
-    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff"]':
         return tree
     tree.set(index,value_at_index)
     return tree
 
 def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
 
-    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor"]':
+    if tree == 'Use from this list of fn types:- ["sum","gcd","max","min","str","xor","evenIndexOddIndexAlternatingDiff"]':
         return tree
     if fn_type == "gcd":
         rv = 0
@@ -83,6 +86,15 @@ def get_range_update_in_the_tree(tree, fn_type, start_index, end_index):
         list_of_a_tree = list(tree)
         for idx in range(start_index,end_index+1):
             rv ^= list_of_a_tree[idx]
+        return rv
+    elif fn_type == "evenIndexOddIndexAlternatingDiff":
+        rv = 0
+        list_of_a_tree = list(tree)
+        for idx in range(start_index,end_index+1):
+            if idx%2==0:
+                rv += list_of_a_tree[idx]
+            else:
+                rv -= list_of_a_tree[idx]
         return rv
     else:
         string = f"{fn_type}({list(tree)}[{start_index}:{end_index+1}])"
